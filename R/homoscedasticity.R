@@ -1,10 +1,9 @@
-#source('./R/setup.R')
-
 #' Check Homoscedasticity
 #'
 #' @description Check homoscedasticity assumption of linear regression.
 #'
-#' @import ggplot2, ggfortify
+#' @import ggplot2
+#' @import ggfortify
 #'
 #' @examples
 #' data(trees)

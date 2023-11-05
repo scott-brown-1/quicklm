@@ -1,10 +1,9 @@
-#source('./R/setup.R')
-
 #' Check Residual Normality
 #'
 #' @description Check residual normality assumption of linear regression.
 #'
-#' @import ggplot2, car
+#' @import ggplot2
+#' @import car
 #'
 #' @examples
 #' data(trees)

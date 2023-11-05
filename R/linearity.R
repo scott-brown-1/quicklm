@@ -1,10 +1,10 @@
-#source('./R/setup.R')
-
 #' Check Linearity
 #'
 #' @description Check linearity assumption of linear regression.
 #'
-#' @import ggplot2, ggfortify, car
+#' @import ggplot2
+#' @import ggfortify
+#' @import car
 #'
 #' @examples
 #' data(trees)

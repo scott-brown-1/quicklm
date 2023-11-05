@@ -6,7 +6,11 @@ Authors@R:
     person("Scott", "Brown", , "scottdbrown7@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0009-0008-7332-4467"))
 Description: Easily evaluate the assumptions of a simple or multiple linear regression model.
-Imports: ggplot2, ggfortify, car, GGally
+Imports: 
+  ggplot2, 
+  ggfortify, 
+  car, 
+  GGally
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

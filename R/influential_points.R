@@ -1,10 +1,9 @@
-#source('./R/setup.R')
-
 #' Check Unduly Influential Points Assumption
 #'
 #' @description Check the no unduly influential points assumption of linear regression.
 #'
-#' @import ggplot2, ggfortify
+#' @import ggplot2
+#' @import ggfortify
 #'
 #' @examples
 #' data(trees)

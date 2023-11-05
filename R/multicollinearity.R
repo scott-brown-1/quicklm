@@ -1,10 +1,9 @@
-#source('./R/setup.R')
-
 #' Check Minimal Multicollinearity Assumption
 #'
 #' @description Check the minimal multicollinearity assumption of linear regression.
 #'
-#' @import car, GGally
+#' @import car
+#' @import GGally
 #'
 #' @examples
 #' data(trees)
