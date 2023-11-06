@@ -4,7 +4,7 @@
 \alias{check_influential_points}
 \title{Check Unduly Influential Points Assumption}
 \usage{
-check_influential_points(model)
+check_influential_points(model, cd_threshold = 4/model$df.residual)
 }
 \description{
 Check the no unduly influential points assumption of linear regression.

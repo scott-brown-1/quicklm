@@ -42,6 +42,6 @@ check_multicollinearity <- function(model){
   corr_plot <- GGally::ggpairs(df)
 
   ## Print plots
-  print(corr_plot)
+  suppressMessages(print(corr_plot))
   cat('\nCreated correlation matrix\n')
 }

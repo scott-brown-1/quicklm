@@ -66,7 +66,7 @@ check_linearity <- function(model, is_SLR = NULL){
         data = df,
         mapping = aes(
           x = .data[[col]],
-          y = df$residuals)) +
+          y = .data[['residuals']])) +
         geom_point() +
         geom_smooth(
           method = "lm",

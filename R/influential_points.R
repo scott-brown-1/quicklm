@@ -11,7 +11,7 @@
 #' check_influential_points(tree_model)
 #'
 #' @export
-check_influential_points <- function(model){
+check_influential_points <- function(model, cd_threshold = 4 / model$df.residual){
   cat('\n--- ASSUMPTION: NO UNDULY INFLUENTIAL POINTS --- \n')
 
   df <- model$model
@@ -19,9 +19,6 @@ check_influential_points <- function(model){
   ## Define functions to calculate Cook's distance
   cd_cont_pos <- function(leverage, level, model) {sqrt(level*length(coef(model))*(1-leverage)/leverage)}
   cd_cont_neg <- function(leverage, level, model) {-cd_cont_pos(leverage, level, model)}
-
-  ## Set Cook's distance threshold as 4/df
-  cd_threshold <- 4 / model$df.residual
 
   ## Display Residuals vs. Leverage plot
   resid_lev_plot <- autoplot(model, which = 5) +
