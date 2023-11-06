@@ -5,6 +5,7 @@
 #' @import ggplot2
 #' @import ggfortify
 #' @import car
+#' @import patchwork
 #'
 #' @examples
 #' data(trees)
@@ -67,16 +68,16 @@ check_linearity <- function(model, is_SLR = NULL){
         mapping = aes(
           x = .data[[col]],
           y = .data[['residuals']])) +
-        geom_point()# +
-        # geom_smooth(
-        #   method = "lm",
-        #   se = FALSE,
-        #   formula = y ~ x) +
-        # theme(aspect.ratio = 1) +
-        # labs(
-        #   title = paste("Residuals vs.", col),
-        #   x = col,
-        #   y = 'Residuals')
+        geom_point() +
+        geom_smooth(
+          method = "lm",
+          se = FALSE,
+          formula = y ~ x) +
+        theme(aspect.ratio = 1) +
+        labs(
+          title = paste("Residuals vs.", col),
+          x = col,
+          y = 'Residuals')
 
       if(is.null(scatterplot)){
         scatterplot <- single_scatplot
