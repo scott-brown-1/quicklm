@@ -9,10 +9,10 @@ library(bestglm)
 #' @examples
 #' data(trees)
 #' tree_model <- lm(Volume ~ Height + Girth, data=trees)
-#' var_selection_step(tree_model, direction='forward', criteria='AIC', print_summary=T)
+#' var_selection_step(tree_model, direction='forward', criteria='AIC', return_model=F)
 #'
 #' @export
-var_selection_step <- function(model, direction, criteria='AIC', print_summary=T){
+var_selection_step <- function(model, direction, criteria='AIC'){
   ## Extract data from model
   df <- if(class(model) == 'lm') model$model else as.data.frame(model)
 
@@ -34,7 +34,7 @@ var_selection_step <- function(model, direction, criteria='AIC', print_summary=T
                    scope=list(lower = base_mod, upper = full_mod))
 
   ## Display best models
-  if(print_summary) print(summary(step_mod))
+  print(summary(step_mod))
   return(step_mod)
 }
 
@@ -45,20 +45,19 @@ var_selection_step <- function(model, direction, criteria='AIC', print_summary=T
 #' @examples
 #' data(trees)
 #' tree_model <- lm(Volume ~ Height + Girth, data=trees)
-#' var_selection_forward(tree_model, criteria='AIC', print_summary=T)
+#' var_selection_forward(tree_model, criteria='AIC', return_model=F)
 #'
 #' @export
-var_selection_forward <- function(model, criteria='AIC', print_summary=T){
+var_selection_forward <- function(model, criteria='AIC', return_model=F){
   ## Perform stepwise variable selection
   selected_model <- var_selection_step(
     model = model,
     direction = 'forward',
-    criteria = criteria,
-    print_summary = print_summary)
+    criteria = criteria)
 
   ## Return results
   cat(paste0('--- VARIABLE SELECTION: ',criteria,' STEP FORWARD ---\n'))
-  return(selected_model)
+  if(return_model) return(selected_model)
 }
 
 #' Step backward variable selection
@@ -68,20 +67,19 @@ var_selection_forward <- function(model, criteria='AIC', print_summary=T){
 #' @examples
 #' data(trees)
 #' tree_model <- lm(Volume ~ Height + Girth, data=trees)
-#' var_selection_backward(tree_model, criteria='AIC', print_summary=T)
+#' var_selection_backward(tree_model, criteria='AIC', return_model=F)
 #'
 #' @export
-var_selection_backward <- function(model, criteria='AIC', print_summary=T){
+var_selection_backward <- function(model, criteria='AIC', return_model=F){
   ## Perform stepwise variable selection
   selected_model <- var_selection_step(
     model = model,
     direction = 'backward',
-    criteria = criteria,
-    print_summary = print_summary)
+    criteria = criteria)
 
   ## Return results
   cat(paste0('--- VARIABLE SELECTION: ',criteria,' STEP BACKWARD ---\n'))
-  return(selected_model)
+  if(return_model) return(selected_model)
 }
 
 #' Sequential replacement variable selection
@@ -91,18 +89,17 @@ var_selection_backward <- function(model, criteria='AIC', print_summary=T){
 #' @examples
 #' data(trees)
 #' tree_model <- lm(Volume ~ Height + Girth, data=trees)
-#' var_selection_sequential(tree_model, criteria='AIC', print_summary=T)
+#' var_selection_sequential(tree_model, criteria='AIC', return_model=F)
 #'
 #' @export
-var_selection_sequential <- function(model, criteria='AIC', print_summary=T){
+var_selection_sequential <- function(model, criteria='AIC', return_model=F){
   ## Perform stepwise variable selection
   selected_model <- var_selection_step(
     model = model,
     direction = 'both',
-    criteria = criteria,
-    print_summary = print_summary)
+    criteria = criteria)
 
   ## Return results
   cat(paste0('--- VARIABLE SELECTION: ',criteria,' SEQUENTIAL REPLACEMENT ---\n'))
-  return(selected_model)
+  if(return_model) return(selected_model)
 }
