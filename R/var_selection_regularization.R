@@ -9,10 +9,10 @@
 #' @examples
 #' data(trees)
 #' tree_model <- lm(Volume ~ Height + Girth, data=trees)
-#' var_selection_regularization(tree_model, type='lasso', criteria='AIC')
+#' var_selection_regularization(tree_model, type='lasso')
 #'
 #' @export
-var_selection_regularization <- function(model, type = 'lasso', criteria='AIC'){
+var_selection_regularization <- function(model, type='lasso', show_plot=T){
   ## Extract X and y from model
   df <- if(class(model) == 'lm') model$model else as.data.frame(model)
   y <- df[, ncol(df)]
@@ -25,7 +25,7 @@ var_selection_regularization <- function(model, type = 'lasso', criteria='AIC'){
   cv <- cv.glmnet(x = x, y = y, type.measure = "mse", alpha = alpha)
 
   ## Plot log lambda vs MSE
-  print(autoplot(cv, label = FALSE))
+  if(show_plot) print(autoplot(cv, label = FALSE))
 
   ## Print lambda within 1 standard error of min CV error
   cat('\nLAMBDA MIN :\n\n')
@@ -44,14 +44,14 @@ var_selection_regularization <- function(model, type = 'lasso', criteria='AIC'){
 #' var_selection_lasso(tree_model, criteria='AIC')
 #'
 #' @export
-var_selection_lasso <- function(model, criteria='AIC'){
+var_selection_lasso <- function(model, show_plot=T){
   ## Perform variable selection via regularization
-  cat(paste0('--- VARIABLE SELECTION: ',criteria,' LASSO REGULARIZATION ---\n'))
+  cat('--- VARIABLE SELECTION: LASSO REGULARIZATION ---\n')
 
   var_selection_regularization(
     model = model,
     type = 'lasso',
-    criteria = criteria)
+    show_plot = show_plot)
 }
 
 #' Elastic Net regularization variable selection
@@ -64,12 +64,12 @@ var_selection_lasso <- function(model, criteria='AIC'){
 #' var_selection_elastic_net(tree_model, criteria='AIC')
 #'
 #' @export
-var_selection_elastic_net <- function(model, criteria='AIC'){
+var_selection_elastic_net <- function(model, show_plot=T){
   ## Perform variable selection via regularization
-  cat(paste0('--- VARIABLE SELECTION: ',criteria,' ELASTIC NET REGULARIZATION ---\n'))
+  cat('--- VARIABLE SELECTION: ELASTIC NET REGULARIZATION ---\n')
 
   var_selection_regularization(
     model = model,
     type = 'elastic net',
-    criteria = criteria)
+    show_plot = show_plot)
 }

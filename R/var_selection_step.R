@@ -12,16 +12,18 @@ library(bestglm)
 #' var_selection_step(tree_model, direction='forward', criteria='AIC', return_model=F)
 #'
 #' @export
-var_selection_step <- function(model, direction, criteria='AIC'){
+var_selection_step <- function(model, direction, response = NULL, criteria='AIC'){
   ## Extract data from model
   df <- if(class(model) == 'lm') model$model else as.data.frame(model)
+
+  if(is.null(response)) response <- names(df[1])[[1]]
 
   ## Create null and full models as baseline
 
   # Intercept only model
-  base_mod <- lm(as.formula(paste0(names(df[1])[[1]], '~1')), data = df)
+  base_mod <- lm(as.formula(paste0(response, '~1')), data = df)
   # All predictors in model
-  full_mod <- lm(as.formula(paste0(names(df[1])[[1]], '~.')), data = df)
+  full_mod <- lm(as.formula(paste0(response, '~.')), data = df)
 
   ## Create function for AIC vs BIC
   k_func <- if(tolower(criteria) == 'bic') log(nrow(df)) else 2
@@ -50,10 +52,11 @@ var_selection_step <- function(model, direction, criteria='AIC'){
 #' var_selection_forward(tree_model, criteria='AIC', return_model=F)
 #'
 #' @export
-var_selection_forward <- function(model, criteria='AIC', return_model=F){
+var_selection_forward <- function(model, response=NULL, criteria='AIC', return_model=F){
   ## Perform stepwise variable selection
   selected_model <- var_selection_step(
     model = model,
+    response = response,
     direction = 'forward',
     criteria = criteria)
 
@@ -72,10 +75,11 @@ var_selection_forward <- function(model, criteria='AIC', return_model=F){
 #' var_selection_backward(tree_model, criteria='AIC', return_model=F)
 #'
 #' @export
-var_selection_backward <- function(model, criteria='AIC', return_model=F){
+var_selection_backward <- function(model, response=NULL, criteria='AIC', return_model=F){
   ## Perform stepwise variable selection
   selected_model <- var_selection_step(
     model = model,
+    response = response,
     direction = 'backward',
     criteria = criteria)
 
@@ -94,7 +98,7 @@ var_selection_backward <- function(model, criteria='AIC', return_model=F){
 #' var_selection_sequential(tree_model, criteria='AIC', return_model=F)
 #'
 #' @export
-var_selection_sequential <- function(model, criteria='AIC', return_model=F){
+var_selection_sequential <- function(model, response=NULL, criteria='AIC', return_model=F){
   ## Perform stepwise variable selection
   selected_model <- var_selection_step(
     model = model,
