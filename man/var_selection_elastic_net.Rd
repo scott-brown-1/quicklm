@@ -4,7 +4,7 @@
 \alias{var_selection_elastic_net}
 \title{Elastic Net regularization variable selection}
 \usage{
-var_selection_elastic_net(model, show_plot = T)
+var_selection_elastic_net(model, response = NULL, show_plot = T)
 }
 \description{
 Perform Elastic Net regularization variable selection
@@ -12,6 +12,6 @@ Perform Elastic Net regularization variable selection
 \examples{
 data(trees)
 tree_model <- lm(Volume ~ Height + Girth, data=trees)
-var_selection_elastic_net(tree_model, show_plot=T)
+var_selection_elastic_net(tree_model, response = 'Volume', show_plot=T)
 
 }

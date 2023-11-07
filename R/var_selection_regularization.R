@@ -9,14 +9,18 @@
 #' @examples
 #' data(trees)
 #' tree_model <- lm(Volume ~ Height + Girth, data=trees)
-#' var_selection_regularization(tree_model, type='lasso', show_plot=T)
+#' var_selection_regularization(tree_model, response = 'Volume', type='lasso', show_plot=T)
 #'
 #' @export
-var_selection_regularization <- function(model, type='lasso', show_plot=T){
+var_selection_regularization <- function(model, response=NULL, type='lasso', show_plot=T){
   ## Extract X and y from model
   df <- if(class(model) == 'lm') model$model else as.data.frame(model)
-  y <- df[, ncol(df)]
-  x <- as.matrix(df[, 1:ncol(df)-1])
+
+  y <- df[response]
+  x <- as.matrix(df[colnames(df) != response])
+
+  # y <- df[, ncol(df)]
+  # x <- as.matrix(df[, 1:ncol(df)-1])
 
   ## Specify LASSO (alpha=1) vs elastic net (alpha=0.5)
   alpha = if(tolower(type) == 'lasso') 1 else 0.5
@@ -41,15 +45,16 @@ var_selection_regularization <- function(model, type='lasso', show_plot=T){
 #' @examples
 #' data(trees)
 #' tree_model <- lm(Volume ~ Height + Girth, data=trees)
-#' var_selection_lasso(tree_model, show_plot=T)
+#' var_selection_lasso(tree_model, response = 'Volume', show_plot=T)
 #'
 #' @export
-var_selection_lasso <- function(model, show_plot=T){
+var_selection_lasso <- function(model, response=NULL, show_plot=T){
   ## Perform variable selection via regularization
   cat('--- VARIABLE SELECTION: LASSO REGULARIZATION ---\n')
 
   var_selection_regularization(
     model = model,
+    response = response,
     type = 'lasso',
     show_plot = show_plot)
 }
@@ -61,15 +66,16 @@ var_selection_lasso <- function(model, show_plot=T){
 #' @examples
 #' data(trees)
 #' tree_model <- lm(Volume ~ Height + Girth, data=trees)
-#' var_selection_elastic_net(tree_model, show_plot=T)
+#' var_selection_elastic_net(tree_model, response = 'Volume', show_plot=T)
 #'
 #' @export
-var_selection_elastic_net <- function(model, show_plot=T){
+var_selection_elastic_net <- function(model, response=NULL, show_plot=T){
   ## Perform variable selection via regularization
   cat('--- VARIABLE SELECTION: ELASTIC NET REGULARIZATION ---\n')
 
   var_selection_regularization(
     model = model,
+    response = response,
     type = 'elastic net',
     show_plot = show_plot)
 }
