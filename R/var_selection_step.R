@@ -26,8 +26,10 @@ var_selection_step <- function(model, direction, criteria='AIC'){
   ## Create function for AIC vs BIC
   k_func <- if(tolower(criteria) == 'bic') log(nrow(df)) else 2
 
+  start_mod <- if(direction == 'forward') base_mod else full_mod
+
   ## Calculate best model by AIC and BIC using step forward
-  step_mod <- step(base_mod,
+  step_mod <- step(start_mod,
                    k = k_func,
                    direction = direction,
                    trace = 0,
