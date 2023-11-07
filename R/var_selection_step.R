@@ -53,6 +53,7 @@ var_selection_step <- function(model, direction, response = NULL, criteria='AIC'
 #'
 #' @export
 var_selection_forward <- function(model, response=NULL, criteria='AIC', return_model=F){
+  cat(paste0('--- VARIABLE SELECTION: ',criteria,' STEP FORWARD ---\n'))
   ## Perform stepwise variable selection
   selected_model <- var_selection_step(
     model = model,
@@ -61,7 +62,6 @@ var_selection_forward <- function(model, response=NULL, criteria='AIC', return_m
     criteria = criteria)
 
   ## Return results
-  cat(paste0('--- VARIABLE SELECTION: ',criteria,' STEP FORWARD ---\n'))
   if(return_model) return(selected_model)
 }
 
@@ -76,6 +76,8 @@ var_selection_forward <- function(model, response=NULL, criteria='AIC', return_m
 #'
 #' @export
 var_selection_backward <- function(model, response=NULL, criteria='AIC', return_model=F){
+  cat(paste0('--- VARIABLE SELECTION: ',criteria,' STEP BACKWARD ---\n'))
+
   ## Perform stepwise variable selection
   selected_model <- var_selection_step(
     model = model,
@@ -84,7 +86,6 @@ var_selection_backward <- function(model, response=NULL, criteria='AIC', return_
     criteria = criteria)
 
   ## Return results
-  cat(paste0('--- VARIABLE SELECTION: ',criteria,' STEP BACKWARD ---\n'))
   if(return_model) return(selected_model)
 }
 
@@ -99,13 +100,15 @@ var_selection_backward <- function(model, response=NULL, criteria='AIC', return_
 #'
 #' @export
 var_selection_sequential <- function(model, response=NULL, criteria='AIC', return_model=F){
+  cat(paste0('--- VARIABLE SELECTION: ',criteria,' SEQUENTIAL REPLACEMENT ---\n'))
+
   ## Perform stepwise variable selection
   selected_model <- var_selection_step(
     model = model,
+    response = response,
     direction = 'both',
     criteria = criteria)
 
   ## Return results
-  cat(paste0('--- VARIABLE SELECTION: ',criteria,' SEQUENTIAL REPLACEMENT ---\n'))
   if(return_model) return(selected_model)
 }
