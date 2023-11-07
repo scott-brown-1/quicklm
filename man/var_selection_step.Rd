@@ -4,7 +4,7 @@
 \alias{var_selection_step}
 \title{Stepwise variable selection}
 \usage{
-var_selection_step(model, direction, criteria = "AIC", print_summary = T)
+var_selection_step(model, direction, criteria = "AIC")
 }
 \description{
 Perform stepwise variable selection: forward, backward, or sequential replacement
@@ -12,6 +12,6 @@ Perform stepwise variable selection: forward, backward, or sequential replacemen
 \examples{
 data(trees)
 tree_model <- lm(Volume ~ Height + Girth, data=trees)
-var_selection_step(tree_model, direction='forward', criteria='AIC', print_summary=T)
+var_selection_step(tree_model, direction='forward', criteria='AIC', return_model=F)
 
 }

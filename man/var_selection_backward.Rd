@@ -4,7 +4,7 @@
 \alias{var_selection_backward}
 \title{Step backward variable selection}
 \usage{
-var_selection_backward(model, criteria = "AIC", print_summary = T)
+var_selection_backward(model, criteria = "AIC", return_model = F)
 }
 \description{
 Perform step backward variable selection
@@ -12,6 +12,6 @@ Perform step backward variable selection
 \examples{
 data(trees)
 tree_model <- lm(Volume ~ Height + Girth, data=trees)
-var_selection_backward(tree_model, criteria='AIC', print_summary=T)
+var_selection_backward(tree_model, criteria='AIC', return_model=F)
 
 }

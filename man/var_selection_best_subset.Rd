@@ -4,7 +4,7 @@
 \alias{var_selection_best_subset}
 \title{Best subsets variable selection}
 \usage{
-var_selection_best_subset(model, criteria = "AIC", print_summary = T)
+var_selection_best_subset(model, criteria = "AIC", return_model = F)
 }
 \description{
 Perform best subsets variable selection
@@ -12,6 +12,6 @@ Perform best subsets variable selection
 \examples{
 data(trees)
 tree_model <- lm(Volume ~ Height + Girth, data=trees)
-var_selection_best_subset(tree_model, criteria='AIC', print_summary=T)
+var_selection_best_subset(tree_model, criteria='AIC', return_model=F)
 
 }
