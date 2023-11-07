@@ -4,7 +4,12 @@
 \alias{var_selection_best_subset}
 \title{Best subsets variable selection}
 \usage{
-var_selection_best_subset(model, criteria = "AIC", return_model = F)
+var_selection_best_subset(
+  model,
+  response = NULL,
+  criteria = "AIC",
+  return_model = F
+)
 }
 \description{
 Perform best subsets variable selection

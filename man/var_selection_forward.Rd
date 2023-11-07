@@ -4,7 +4,12 @@
 \alias{var_selection_forward}
 \title{Step forward variable selection}
 \usage{
-var_selection_forward(model, criteria = "AIC", return_model = F)
+var_selection_forward(
+  model,
+  response = NULL,
+  criteria = "AIC",
+  return_model = F
+)
 }
 \description{
 Perform step forward variable selection
@@ -12,6 +17,6 @@ Perform step forward variable selection
 \examples{
 data(trees)
 tree_model <- lm(Volume ~ Height + Girth, data=trees)
-var_selection_forward(tree_model, criteria='AIC', return_model=F)
+var_selection_forward(tree_model, response='Volume',criteria='AIC', return_model=F)
 
 }

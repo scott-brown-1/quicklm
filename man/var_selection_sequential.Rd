@@ -4,7 +4,12 @@
 \alias{var_selection_sequential}
 \title{Sequential replacement variable selection}
 \usage{
-var_selection_sequential(model, criteria = "AIC", return_model = F)
+var_selection_sequential(
+  model,
+  response = NULL,
+  criteria = "AIC",
+  return_model = F
+)
 }
 \description{
 Perform sequential replacement variable selection
@@ -12,6 +17,6 @@ Perform sequential replacement variable selection
 \examples{
 data(trees)
 tree_model <- lm(Volume ~ Height + Girth, data=trees)
-var_selection_sequential(tree_model, criteria='AIC', return_model=F)
+var_selection_sequential(tree_model, response='Volume', criteria='AIC', return_model=F)
 
 }

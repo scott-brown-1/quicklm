@@ -9,7 +9,7 @@
 #' @examples
 #' data(trees)
 #' tree_model <- lm(Volume ~ Height + Girth, data=trees)
-#' var_selection_regularization(tree_model, type='lasso')
+#' var_selection_regularization(tree_model, type='lasso', show_plot=T)
 #'
 #' @export
 var_selection_regularization <- function(model, type='lasso', show_plot=T){
@@ -41,7 +41,7 @@ var_selection_regularization <- function(model, type='lasso', show_plot=T){
 #' @examples
 #' data(trees)
 #' tree_model <- lm(Volume ~ Height + Girth, data=trees)
-#' var_selection_lasso(tree_model, criteria='AIC')
+#' var_selection_lasso(tree_model, show_plot=T)
 #'
 #' @export
 var_selection_lasso <- function(model, show_plot=T){
@@ -61,7 +61,7 @@ var_selection_lasso <- function(model, show_plot=T){
 #' @examples
 #' data(trees)
 #' tree_model <- lm(Volume ~ Height + Girth, data=trees)
-#' var_selection_elastic_net(tree_model, criteria='AIC')
+#' var_selection_elastic_net(tree_model, show_plot=T)
 #'
 #' @export
 var_selection_elastic_net <- function(model, show_plot=T){

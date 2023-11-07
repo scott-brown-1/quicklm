@@ -9,7 +9,7 @@ library(bestglm)
 #' @examples
 #' data(trees)
 #' tree_model <- lm(Volume ~ Height + Girth, data=trees)
-#' var_selection_step(tree_model, direction='forward', criteria='AIC', return_model=F)
+#' var_selection_step(tree_model, direction='forward', response='Volume', criteria='AIC', return_model=F)
 #'
 #' @export
 var_selection_step <- function(model, direction, response = NULL, criteria='AIC'){
@@ -49,7 +49,7 @@ var_selection_step <- function(model, direction, response = NULL, criteria='AIC'
 #' @examples
 #' data(trees)
 #' tree_model <- lm(Volume ~ Height + Girth, data=trees)
-#' var_selection_forward(tree_model, criteria='AIC', return_model=F)
+#' var_selection_forward(tree_model, response='Volume',criteria='AIC', return_model=F)
 #'
 #' @export
 var_selection_forward <- function(model, response=NULL, criteria='AIC', return_model=F){
@@ -72,7 +72,7 @@ var_selection_forward <- function(model, response=NULL, criteria='AIC', return_m
 #' @examples
 #' data(trees)
 #' tree_model <- lm(Volume ~ Height + Girth, data=trees)
-#' var_selection_backward(tree_model, criteria='AIC', return_model=F)
+#' var_selection_backward(tree_model, response='Volume',criteria='AIC', return_model=F)
 #'
 #' @export
 var_selection_backward <- function(model, response=NULL, criteria='AIC', return_model=F){
@@ -95,7 +95,7 @@ var_selection_backward <- function(model, response=NULL, criteria='AIC', return_
 #' @examples
 #' data(trees)
 #' tree_model <- lm(Volume ~ Height + Girth, data=trees)
-#' var_selection_sequential(tree_model, criteria='AIC', return_model=F)
+#' var_selection_sequential(tree_model, response='Volume', criteria='AIC', return_model=F)
 #'
 #' @export
 var_selection_sequential <- function(model, response=NULL, criteria='AIC', return_model=F){

@@ -4,7 +4,7 @@
 \alias{var_selection_regularization}
 \title{Regularization variable selection}
 \usage{
-var_selection_regularization(model, type = "lasso", criteria = "AIC")
+var_selection_regularization(model, type = "lasso", show_plot = T)
 }
 \description{
 Perform regularization variable selection: LASSO or Elastic Net
@@ -12,6 +12,6 @@ Perform regularization variable selection: LASSO or Elastic Net
 \examples{
 data(trees)
 tree_model <- lm(Volume ~ Height + Girth, data=trees)
-var_selection_regularization(tree_model, type='lasso', criteria='AIC')
+var_selection_regularization(tree_model, type='lasso', show_plot=T)
 
 }

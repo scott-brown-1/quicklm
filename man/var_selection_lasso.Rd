@@ -4,7 +4,7 @@
 \alias{var_selection_lasso}
 \title{LASSO regularization variable selection}
 \usage{
-var_selection_lasso(model, criteria = "AIC")
+var_selection_lasso(model, show_plot = T)
 }
 \description{
 Perform LASSO regularization variable selection
@@ -12,6 +12,6 @@ Perform LASSO regularization variable selection
 \examples{
 data(trees)
 tree_model <- lm(Volume ~ Height + Girth, data=trees)
-var_selection_lasso(tree_model, criteria='AIC')
+var_selection_lasso(tree_model, show_plot=T)
 
 }
