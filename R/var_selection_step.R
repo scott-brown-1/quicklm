@@ -14,7 +14,7 @@ library(bestglm)
 #' @export
 var_selection_step <- function(model, direction, criteria='AIC', print_summary=T){
   ## Extract data from model
-  df <- model$model
+  df <- if(class(model) == 'lm') model$model else as.data.frame(model)
 
   ## Create null and full models as baseline
 

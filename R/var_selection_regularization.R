@@ -14,7 +14,7 @@
 #' @export
 var_selection_regularization <- function(model, type = 'lasso', criteria='AIC'){
   ## Extract X and y from model
-  df <- model$model
+  df <- if(class(model) == 'lm') model$model else as.data.frame(model)
   y <- df[, ncol(df)]
   x <- as.matrix(df[, 1:ncol(df)-1])
 
