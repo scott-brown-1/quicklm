@@ -1,5 +1,3 @@
-# @import patchwork
-
 #' Check Linearity
 #'
 #' @description Check linearity assumption of linear regression.
@@ -55,50 +53,52 @@ check_linearity <- function(model, is_SLR = NULL){
         method = "lm",
         se = FALSE,
         formula = y ~ x)
-
-    ## Print plots
-    print(scatterplot)
   }else{
     ## If multiple linear regression..
 
-    # ## Plot every variable against the residuals
-    # df['residuals'] <- model$residuals
-    #
-    # scatterplot <- NULL
-    #
-    # for (col in names(df)[names(df) != 'residuals']) {
-    #   ## Plot scatterplot of x vs residuals with OLS line overlaid
-    #   single_scatplot <- ggplot(
-    #     data = df,
-    #     mapping = aes(
-    #       x = .data[[col]],
-    #       y = .data[['residuals']])) +
-    #     geom_point() +
-    #     geom_smooth(
-    #       method = "lm",
-    #       se = FALSE,
-    #       formula = y ~ x) +
-    #     theme(aspect.ratio = 1) +
-    #     labs(
-    #       title = paste("Residuals vs.", col),
-    #       x = col,
-    #       y = 'Residuals')
-    #
-    #   if(is.null(scatterplot)){
-    #     scatterplot <- single_scatplot
-    #   }else{
-    #     scatterplot <- scatterplot + single_scatplot
-    #   }
-    # }
-
     ## Print plots
     avPlots(model)
+    
+    ## Plot every variable against the residuals
+    df['residuals'] <- model$residuals
+    
+    scatterplot <- NULL
+    
+    for (col in names(df)[names(df) != 'residuals']) {
+      ## Plot scatterplot of x vs residuals with OLS line overlaid
+      single_scatplot <- ggplot(
+        data = df,
+        mapping = aes(
+          x = .data[[col]],
+          y = .data[['residuals']])) +
+        geom_point() +
+        geom_smooth(
+          method = "lm",
+          se = FALSE,
+          formula = y ~ x) +
+        theme(aspect.ratio = 1) +
+        labs(
+          title = paste("Residuals vs.", col),
+          x = col,
+          y = 'Residuals')
+    
+      if(is.null(scatterplot)){
+        scatterplot <- single_scatplot
+      }else{
+        scatterplot <- scatterplot + single_scatplot
+      }
+    }
+
+    cat("\nCreated added variable plot\n")
   }
 
   # Plot residuals vs. fitted values of data
   resid_fitted_plot <- autoplot(model, which = 1, ncol = 1, nrow = 1)
+
+  ## Print plots
+  print(scatterplot)
   print(resid_fitted_plot)
 
-  cat("\nCreated scatterplot of y vs. X\n")
+  cat("\nCreated scatterplot of y\n")
   cat("\nCreated residuals vs. fitted values plot\n")
 }
