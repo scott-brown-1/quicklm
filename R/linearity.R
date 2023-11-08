@@ -92,7 +92,7 @@ check_linearity <- function(model, is_SLR = NULL){
     # }
 
     ## Print plots
-    print(avPlots(model))
+    avPlots(model)
   }
 
   # Plot residuals vs. fitted values of data
