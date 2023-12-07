@@ -14,7 +14,7 @@ library(bestglm)
 #' @export
 var_selection_step <- function(model, direction, response = NULL, criteria='AIC'){
   ## Extract data from model
-  df <- if(class(model) == 'lm') model$model else as.data.frame(model)
+  df <- if(class(model)[1] == 'lm') model$model else as.data.frame(model)
 
   if(is.null(response)) response <- names(df[1])[[1]]
 

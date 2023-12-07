@@ -13,7 +13,7 @@
 var_selection_best_subset <- function(model, response=NULL, criteria='AIC', return_model=F){
   ## Extract data from model
   # This df has response last
-  df <- if(class(model) == 'lm') model$model else as.data.frame(model)
+  df <- if(class(model)[1] == 'lm') model$model else as.data.frame(model)
 
   if(!is.null(response)) df <- df[c(colnames(df)[colnames(df) != response], response)]
 

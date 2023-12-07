@@ -14,7 +14,7 @@
 #' @export
 var_selection_regularization <- function(model, response=NULL, type='lasso', show_plot=T){
   ## Extract X and y from model
-  df <- if(class(model) == 'lm') model$model else as.data.frame(model)
+  df <- if(class(model)[1] == 'lm') model$model else as.data.frame(model)
 
   y <- df[[response]]
   x <- as.matrix(df[colnames(df) != response])
