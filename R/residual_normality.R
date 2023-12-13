@@ -18,8 +18,10 @@ check_residual_normality <- function(model){
   df['residuals'] <- model$residuals
 
   ## Print results of Shapiro-Wilk test on residuals
-  cat('\nShapiro-Wilk Normality Test, null hypothesis that residuals ARE normal: \n')
-  print(shapiro.test(df$residuals))
+  tryCatch({
+    cat('\nShapiro-Wilk Normality Test, null hypothesis that residuals ARE normal: \n')
+    print(shapiro.test(df$residuals))
+  })
 
   ## Create histogram of residuals
   resid_hist <- ggplot(data = df) +
